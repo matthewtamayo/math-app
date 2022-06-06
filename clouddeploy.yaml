@@ -1,8 +1,8 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: DeliveryPipeline
 metadata:
- name: math-app-1
-description: main application pipeline
+ name: math-app-pipeline
+description: math app pipeline
 serialPipeline:
  stages:
  - targetId: dev
