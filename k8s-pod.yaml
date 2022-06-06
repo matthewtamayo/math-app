@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: math-app
+spec:
+  containers:
+  - name: math-app
+    image: math-app-image
