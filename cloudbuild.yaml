@@ -2,10 +2,7 @@ steps:
 
 #Build docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 
-          'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1',
-          '.' 
-        ]
+  args: [ 'build', '-t', "us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1", '.' ]
 
 #Push image to Artifact Registry
 images:
@@ -14,9 +11,8 @@ images:
 #Release to GKE
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: gcloud
-  args: [ 'deploy', releases', 
-          'create', 'math-app-release-004',
-          'delivery-pipeline=math-app-pipeline',
-          'region=us-central1',
-          '--images=math-app=us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1'
+  args: [ 'deploy', releases', 'create', "math-app-release-004",
+          "delivery-pipeline=math-app-pipeline",
+          "region=us-central1",
+          "--images=math-app=us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1"
         ]
