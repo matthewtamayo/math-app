@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "format": "npx prettier *.js",
     "start": "node ."
   },
   "keywords": [],
@@ -11,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "jest": "^28.1.0"
+    "jest": "^28.1.0",
+    "prettier": "^2.6.2"
   }
 }
