@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
   - name: math-app
-    image: math-app-image
+    image: math-app
