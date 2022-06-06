@@ -9,10 +9,10 @@ images:
 - 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1'
 
 #Release to GKE
-- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args: [ "deploy", "releases", "create", "math-app-release-004",
-          "--delivery-pipeline=math-app-pipeline",
           "--region=us-central1",
+          "--delivery-pipeline=math-app-pipeline",
           "--images=math-app=us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1"
         ]
