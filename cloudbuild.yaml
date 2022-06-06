@@ -4,7 +4,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', 
           '-t', 
-          'us-west2-docker.pkg.dev/off-net-dev/math-app/math-app-image:tag1', '.' 
+          'us-central1-docker.pkg.dev/off-net-dev/math-app/math-app-image:tag1', '.' 
         ]
 images:
-- 'us-west2-docker.pkg.dev/off-net-dev/math-app/math-app-image:tag1'
+- 'us-central1-docker.pkg.dev/off-net-dev/math-app/math-app-image:tag1'
