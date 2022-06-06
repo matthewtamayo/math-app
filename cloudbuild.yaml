@@ -8,4 +8,4 @@ steps:
           '.' 
         ]
 images:
-- 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:tag1'
+- 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:$SHORT_SHA'
