@@ -12,7 +12,7 @@ serialPipeline:
 apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
- name: qsdev
+ name: dev
 description: development cluster
 gke:
- cluster: projects/off-net-dev/locations/us-west2/clusters/math-app-cluster-dev
+ cluster: projects/off-net-dev/locations/us-central1/clusters/math-app-cluster-dev
