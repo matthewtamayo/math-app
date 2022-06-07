@@ -1,18 +1,26 @@
 steps:
 
-#Build docker image
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1', '.' ]
+  #Build docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1', '.' ]
 
-#Push image to Artifact Registry
-images:
-- 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1'
+  #Push image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1']
 
-#Release to GKE
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: [ "deploy", "releases", "create", "math-app-release-004",
-          "--region=us-central1",
-          "--delivery-pipeline=math-app-pipeline",
-          "--images=math-app=us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1"
-        ]
+  #Release to GKE
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [ 'deploy',
+            'releases',
+            'create',
+            '${_RELEASE_NAME}',
+            "--region=us-central1",
+            "--delivery-pipeline=math-app-pipeline",
+            "--images=math-app=us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:v1" 
+          ]
+substitutions:
+    _RELEASE_NAME: 'math-app-release-${SHORT_SHA}'
+options:
+    dynamic_substitutions: true
+    substitution_option: 'ALLOW_LOOSE'
