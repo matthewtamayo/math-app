@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "format": "npx prettier *.js",
-    "start": "node . && sleep 50"
+    "start": "node . && sleep 80"
   },
   "keywords": [],
   "author": "",
