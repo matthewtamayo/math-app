@@ -1,0 +1,74 @@
+name: Build and Deploy to GKE
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  PROJECT_ID: "off-net-dev"
+  GAR_LOCATION: us-central1 
+  GKE_CLUSTER: sample-app   
+  DEPLOYMENT_NAME: sample-app 
+  REPOSITORY: sample-repo 
+  IMAGE: math-app-image
+  TAG: v0.0.1
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # authentication via credentials json
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    # The GCloud CLI must be installed and configured in the container to enable subsequent steps
+    - name: Setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+        install_components: "skaffold"
+
+    # Configure docker authorization for access to the Google Artifact Registry
+    - name: Configure Docker
+      run: |-
+        gcloud --quiet auth configure-docker us-central1-docker.pkg.dev
+
+    # Set up Cloud Deploy in your project following the definition in your clouddeploy.yaml file
+    - name: Create or update Cloud Deploy Pipeline
+      run: |-
+        gcloud deploy apply --file clouddeploy.yaml --region ${{ env.REGION }} --project ${{ env.PROJECT_ID }}
+
+  
+    # # Build your application image following the specified profile as defined in your skaffold.yaml file
+    # - name: Skaffold build
+    #   run: |-
+    #     skaffold build --file-output artifacts.json
+    #     docker inspect us-central1-docker.pkg.dev/off-net-dev/sample-repo/math-app-image
+    #     docker push us-central1-docker.pkg.dev/off-net-dev/sample-repo/math-app-image
+    #   env:
+    #     TAG: ${{ env.TAG }}
+
+      # - name: Create Release
+      #   uses: "telus/cdo-actions-cloud-deploy@v1"
+      #   id: create_release
+      #   with:
+      #     action: "create-release"
+      #     delivery_pipeline: ${{ env.DELIVERY_PIPELINE_NAME }}
+      #     release_name: ${{ env.RELEASE_NAME }}
+      #     region: ${{ env.REGION }}
+      #     images: us-central1-docker.pkg.dev/off-net-dev/sample-repo/math-app-image
+      #   env:
+      #     RELEASE_NAME: release-${{ env.TAG }}
+      #     TAG: ${{ env.TAG }}

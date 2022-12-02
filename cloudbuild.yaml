@@ -9,19 +9,18 @@ steps:
     args: [ 'push', '${_IMAGE_NAME}' ]
 
   #Release to GKE
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    args: [ 'deploy',
-            'releases',
-            'create',
-            '${_RELEASE_NAME}',
-            "--region=us-central1",
-            "--delivery-pipeline=math-app-pipeline",
-            "--images=math-app=${_IMAGE_NAME}"
-          ]
+  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #   entrypoint: 'gcloud'
+  #   args: [ 'deploy',
+  #           'releases',
+  #           'create',
+  #           '${_RELEASE_NAME}',
+  #           "--region=us-central1",
+  #           "--delivery-pipeline=math-app-pipeline",
+  #           "--images=math-app=${_IMAGE_NAME}"
+  #         ]
 substitutions:
-    _IMAGE_NAME: 'us-central1-docker.pkg.dev/off-net-dev/math-app-repo/math-app-image:${SHORT_SHA}'
-    _RELEASE_NAME: 'math-app-release-${SHORT_SHA}'
+    _IMAGE_NAME: 'us-central1-docker.pkg.dev/off-net-dev/sample-repo/math-app-image:v0.1.0'
 options:
     dynamic_substitutions: true
     substitution_option: 'ALLOW_LOOSE'
