@@ -48,7 +48,7 @@ jobs:
     # Set up Cloud Deploy in your project following the definition in your clouddeploy.yaml file
     - name: Create or update Cloud Deploy Pipeline
       run: |-
-        gcloud deploy apply --file clouddeploy.yaml --region ${{ env.REGION }} --project ${{ env.PROJECT_ID }}
+        gcloud deploy apply --file clouddeploy.yaml --region ${{ env.GAR_LOCATION }} --project ${{ env.PROJECT_ID }}
 
   
     # # Build your application image following the specified profile as defined in your skaffold.yaml file
