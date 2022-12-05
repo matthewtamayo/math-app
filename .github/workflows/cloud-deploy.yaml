@@ -38,9 +38,6 @@ jobs:
     - name: echo last success
       run: |-
         gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
-    - name: echo commits
-      run: |-
-        echo "commits: " ${{ github.event.commits }}
     - name: show ancestor
       run: |-
         git rev-list ${{github.sha}} ^${{github.event.before}}
