@@ -32,6 +32,9 @@ jobs:
         echo "before" ${{ github.event.before }}
         echo "sha" ${{ github.sha }}
         
+    - name: echo last success
+      run: |-
+        gh run list --workflow cloud-deploy.yaml | grep -oh "success.*"
 
     - name: show ancestor
       run: |-
