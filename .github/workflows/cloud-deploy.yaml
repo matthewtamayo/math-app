@@ -31,12 +31,11 @@ jobs:
 
     - name: echo refs
       run: |-
-        echo "base-ref" ${{ github.event.base_ref }}
         echo "before" ${{ github.event.before }}
 
-    - name: show log
-      run: |-
-       git log --graph --pretty=oneline --abbrev-commit
+    # - name: show log
+    #   run: |-
+    #    git log --graph --pretty=oneline --abbrev-commit
 
     # authentication via credentials json
     - id: 'auth'
