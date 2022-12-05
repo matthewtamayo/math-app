@@ -26,8 +26,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with: 
-        fetch-depth: 0
+      # with: 
+      #   fetch-depth: 0
+
+    - name: echo refs
+      run: |-
+        echo "base-ref" ${{ github.event.base_ref }}
+        echo "before" ${{ github.event.before }}
 
     # authentication via credentials json
     - id: 'auth'
@@ -52,7 +57,7 @@ jobs:
       run: |-
         gcloud deploy apply --file clouddeploy.yaml --region ${{ env.GAR_LOCATION }} --project ${{ env.PROJECT_ID }}
 
-  
+    
     # # Build your application image following the specified profile as defined in your skaffold.yaml file
     # - name: Skaffold build
     #   run: |-
