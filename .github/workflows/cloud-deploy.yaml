@@ -41,9 +41,7 @@ jobs:
         echo "commits: " ${{ github.event.commits }}
     - name: show ancestor
       run: |-
-        for commit in $(git rev-list ${{ github.base_ref }}..${{ github.head_ref}}); do
-              echo $commit
-        done
+        git log --ancestry-path ${{github.event.before}}..${{github.sha}}
 
     # authentication via credentials json
     - id: 'auth'
