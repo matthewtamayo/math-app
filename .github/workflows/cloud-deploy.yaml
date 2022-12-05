@@ -29,8 +29,8 @@ jobs:
 
     - name: echo refs
       run: |-
-        echo "sha" ${{ github.sha }}
         echo "before" ${{ github.event.before }}
+        echo "sha" ${{ github.sha }}
         
 
     - name: show ancestor
