@@ -37,9 +37,9 @@ jobs:
       run: |-
         gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
 
-    - name: show ancestor
-      run: |-
-        git rev-list --all --ancestry-path ^${{ github.event.before }}
+    # - name: show ancestor
+    #   run: |-
+    #     git rev-list --all --ancestry-path ^${{ github.event.before }}
 
     # authentication via credentials json
     - id: 'auth'
