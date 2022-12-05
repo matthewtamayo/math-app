@@ -30,6 +30,7 @@ jobs:
     - name: echo refs
       run: |-
         echo "before" ${{ github.event.before }}
+        echo "sha" ${{ github.sha }}
 
     - name: show ancestor
       run: |-
