@@ -35,7 +35,7 @@ jobs:
 
     - name: show ancestor
       run: |-
-        git rev-list --ancestry-path ${{ github.event.before }}..${{ github.sha }}
+        git rev-list --all --ancestry-path ^${{ github.event.before }}
 
     # authentication via credentials json
     - id: 'auth'
