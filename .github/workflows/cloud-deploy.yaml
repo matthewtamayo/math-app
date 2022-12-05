@@ -35,7 +35,7 @@ jobs:
         
     - name: echo last success
       run: |-
-        gh run list --workflow cloud-deploy.yaml --status="success"
+        gh api -H "Accept: application/vnd.github+json" /repos/OWNER/REPO/actions/workflows/cloud-deploy.yaml/runs?status="success"
 
     # - name: show ancestor
     #   run: |-
