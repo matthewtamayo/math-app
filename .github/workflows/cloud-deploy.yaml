@@ -31,9 +31,9 @@ jobs:
       run: |-
         echo "before" ${{ github.event.before }}
 
-    # - name: show log
-    #   run: |-
-    #    git log --graph --pretty=oneline --abbrev-commit
+    - name: show ancestor
+      run: |-
+       git rev-list --ancestry-path ${{ github.sha }} ^${{ github.event.before }}
 
     # authentication via credentials json
     - id: 'auth'
