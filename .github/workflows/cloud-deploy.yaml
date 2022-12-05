@@ -41,7 +41,7 @@ jobs:
         echo "commits: " ${{ github.event.commits }}
     - name: show ancestor
       run: |-
-        git rev-parse ${{github.sha}} ^${{github.event.before}}
+        git rev-list ${{github.sha}} ^${{github.event.before}}
 
     # authentication via credentials json
     - id: 'auth'
