@@ -35,7 +35,7 @@ jobs:
         
     - name: echo last success
       run: |-
-        gh run list --workflow cloud-deploy.yaml | grep -oh "success.*"
+        gh run list --workflow cloud-deploy.yaml --status="success"
 
     - name: show ancestor
       run: |-
