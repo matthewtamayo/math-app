@@ -37,9 +37,9 @@ jobs:
       run: |-
         gh run list --workflow cloud-deploy.yaml --status="success"
 
-    - name: show ancestor
-      run: |-
-        git rev-list --all --ancestry-path ^${{ github.event.before }}
+    # - name: show ancestor
+    #   run: |-
+    #     git rev-list --all --ancestry-path ^${{ github.event.before }}
 
     # authentication via credentials json
     - id: 'auth'
