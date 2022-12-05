@@ -37,11 +37,7 @@ jobs:
 
     - name: echo last success
       run: |-
-        SUCCESSFUL_RUN:$(gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc)
-        LAST_HEAD_SHA: $SUCCESSFUL_RUN['workflow_runs'][0]['head_sha']
-        LAST_CREATED_AT: $SUCCESSFUL_RUN['workflow_runs'][0]['created_at']
-        echo "LAST_HEAD_SHA" $LAST_HEAD_SHA
-        echo "LAST_CREATED_AT" $LAST_CREATED_AT
+        gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
     - name: show ancestor
       run: |-
         git rev-list ${{github.sha}} ^${{github.event.before}}
