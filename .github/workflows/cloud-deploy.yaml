@@ -32,12 +32,13 @@ jobs:
 
     - name: echo refs
       run: |-
-        echo "sha" ${{ github.sha }}
         echo "before" ${{ github.event.before }}
-        
+        echo "sha" ${{ github.sha }}
+
     - name: echo last success
       run: |-
         gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
+    
     - name: show ancestor
       run: |-
         git rev-list ${{github.sha}} ^${{github.event.before}}
