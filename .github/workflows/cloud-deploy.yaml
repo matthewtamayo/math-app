@@ -35,7 +35,7 @@ jobs:
         echo "before" ${{ github.event.before }}
         echo "sha" ${{ github.sha }}
         echo "tags"
-        git rev-list --tags 
+        git rev-list --tags --skip=1 --grep -m 1 --timestamp 
 
     - name: echo last success
       run: |-
