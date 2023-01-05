@@ -33,7 +33,7 @@ jobs:
     - name: echo refs
       run: bash ./extract-data.sh
       env:
-        GITHUB_SHA=${{ github.sha }} 
+        GITHUB_SHA: ${{ github.sha }} 
 
     # authentication via credentials json
     - id: 'auth'
