@@ -32,17 +32,16 @@ jobs:
 
     - name: echo refs
       run: |-
-        echo "before" ${{ github.event.before }}
         echo "sha" ${{ github.sha }}
         echo "tags"
-        git rev-list --tags --skip=1 --timestamp --max-count=1 
+        PREVIOUS_TAG_COMMIT=$(git rev-list -n 1 $(git describe --tags)^) 
 
     - name: echo last success
       run: |-
         gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
     - name: show ancestor
       run: |-
-        git rev-list ${{github.sha}} ^${{github.event.before}} --timestamp
+        git rev-list ${{github.sha}} ^${{PREVIOUS_TAG_COMMIT}} --timestamp
 
     # authentication via credentials json
     - id: 'auth'
