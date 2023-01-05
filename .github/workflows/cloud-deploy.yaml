@@ -31,17 +31,9 @@ jobs:
         fetch-depth: 0
 
     - name: echo refs
-      run: |-
-        echo "sha" ${{ github.sha }}
-        echo "tags"
-        PREVIOUS_TAG_COMMIT=$(git rev-list -n 1 $(git describe --tags)^) 
-
-    - name: echo last success
-      run: |-
-        gh api -H "Accept: application/vnd.github+json" /repos/matthewtamayo/math-app/actions/workflows/cloud-deploy.yaml/runs?status="success"&sort=created_at&direction=desc
-    - name: show ancestor
-      run: |-
-        git rev-list ${{github.sha}} ^${{PREVIOUS_TAG_COMMIT}} --timestamp
+      run: bash ./extract-data.sh
+      env:
+        GITHUB_SHA=${{ github.sha }} 
 
     # authentication via credentials json
     - id: 'auth'
